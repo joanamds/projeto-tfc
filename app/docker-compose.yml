@@ -4,7 +4,7 @@ services:
     build: ./frontend
     ports:
       - 3000:3000
-    platform: linux/x86_64
+    # platform: linux/x86_64
     working_dir: /app-frontend
     depends_on:
       backend:
@@ -20,7 +20,7 @@ services:
     build: ./backend
     ports:
       - 3001:3001
-    platform: linux/x86_64
+    # platform: linux/x86_64
     working_dir: /app-backend
     # Caso queira que o container esteja atualizado durante o desenvolvimento, sem que você precise ficar fazendo down e up dos containers, descomente as 3 linhas abaixo
     command: dev 
@@ -45,7 +45,7 @@ services:
   db:
     image: mysql:8.0.21
     container_name: db
-    platform: linux/x86_64
+    # platform: linux/x86_64
     ports:
       - 3002:3306
     environment:

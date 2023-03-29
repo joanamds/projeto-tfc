@@ -4,6 +4,9 @@ import db from '.';
 class TeamsModel extends Model {
   public id!: number;
   public teamName!: string;
+
+  public readonly createdAt!: Date;
+  public readonly updatedAt!: Date;
 }
 
 TeamsModel.init({

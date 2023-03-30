@@ -6,7 +6,7 @@ class UsersModel extends Model {
   public username!: string;
   public role!: string;
   public email!: string;
-  private password!: string;
+  declare password: string;
 }
 
 UsersModel.init({
@@ -32,7 +32,7 @@ UsersModel.init({
   },
   password: {
     type: DataTypes.STRING,
-    field: 'username',
+    field: 'password',
     allowNull: false,
   },
 }, {

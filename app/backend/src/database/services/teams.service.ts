@@ -15,7 +15,6 @@ export default class TeamsService {
 
   public async getById(id: number): Promise<Team> {
     const team = await this.teamsModel.findByPk(id);
-    console.log(team);
     if (!team) {
       throw new Error(`A equipe com id ${id} não foi encontrada'`);
     }

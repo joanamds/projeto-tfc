@@ -11,9 +11,13 @@ export default class TeamsController {
 
   public async login(req: Request, res: Response) {
     const { email, password } = req.body;
-    console.log(`email: ${email} password: ${password}`);
+    if (!email || !password) {
+      return res.status(400).json({ message: 'All fields must be filled' });
+    }
     const getUser = await this.usersService.login(email, password);
-    console.log(getUser);
+    if (!getUser) {
+      return res.status(400).json({ message: 'Incorrect email or password' });
+    }
     return res.status(200).json(getUser);
   }
 }

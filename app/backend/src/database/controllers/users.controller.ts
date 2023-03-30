@@ -1,6 +1,7 @@
 import { Request, Response } from 'express';
 import UsersModel from '../models/UsersModel';
 import UsersService from '../services/users.service';
+import Validation from '../middleware/validations';
 
 export default class TeamsController {
   private usersService: UsersService;
@@ -11,13 +12,18 @@ export default class TeamsController {
 
   public async login(req: Request, res: Response) {
     const { email, password } = req.body;
+    const validate = new Validation(email, password);
+
     if (!email || !password) {
       return res.status(400).json({ message: 'All fields must be filled' });
     }
+
     const getUser = await this.usersService.login(email, password);
-    if (!getUser) {
-      return res.status(400).json({ message: 'Incorrect email or password' });
+
+    if (!getUser || !validate.validateEmail() || !validate.validatePassword()) {
+      return res.status(401).json({ message: 'Invalid email or password' });
     }
+
     return res.status(200).json(getUser);
   }
 }

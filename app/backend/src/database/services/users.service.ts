@@ -6,9 +6,11 @@ class UsersService {
   constructor(usersModel: typeof UsersModel) {
     this.usersModel = usersModel;
   }
-  // public async login(email, password): Promise<> {
 
-  // }
+  public async login(email: string, password: string) {
+    const response = await this.usersModel.findAll({ where: { email, password } });
+    return response;
+  }
 }
 
 export default UsersService;

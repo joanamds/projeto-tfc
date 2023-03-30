@@ -28,10 +28,11 @@ export class ValidateJWT {
         return res.status(401).json({ message: 'Token must be a valid token' });
       }
       res.locals.user = user;
-      next();
     } catch (e) {
+      console.log(e);
       return res.status(401).json({ message: 'Token must be a valid token' });
     }
+    next();
   }
 }
 

@@ -8,7 +8,7 @@ const usersController = new UsersController();
 const validateJWT = new ValidateJWT(UsersModel);
 
 router.post('/', usersController.login.bind(usersController));
-router.get('/role', validateJWT.validateToken, (req, res) => {
+router.get('/role', validateJWT.validateToken.bind(validateJWT), (req, res) => {
   const { user } = res.locals;
   return res.status(200).json({ role: user.role });
 });

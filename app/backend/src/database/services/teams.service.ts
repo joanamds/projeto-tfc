@@ -10,13 +10,12 @@ export default class TeamsService {
 
   public async getAllTeams(): Promise<Team[]> {
     const teams = await this.teamsModel.findAll();
-    console.log(teams);
     return teams;
   }
 
   public async getById(id: number): Promise<Team> {
     const team = await this.teamsModel.findByPk(id);
-
+    console.log(team);
     if (!team) {
       throw new Error(`A equipe com id ${id} não foi encontrada'`);
     }

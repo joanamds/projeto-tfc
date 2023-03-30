@@ -1,6 +1,7 @@
 import * as bcryptjs from 'bcryptjs';
 import * as jwt from 'jsonwebtoken';
 import UsersModel from '../models/UsersModel';
+import { secret, jwtConfig } from '../validations/validateJWT';
 
 class UsersService {
   private usersModel: typeof UsersModel;
@@ -17,8 +18,8 @@ class UsersService {
       if (isRightPassword) {
         const token = jwt.sign(
           { id: user.dataValues.id, role: user.dataValues.role },
-          process.env.JWT_SECRET || 'mysecretkey',
-          { expiresIn: '7d' },
+          secret,
+          jwtConfig,
         );
         return { token };
       }

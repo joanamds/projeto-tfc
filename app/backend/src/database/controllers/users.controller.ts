@@ -1,7 +1,7 @@
 import { Request, Response } from 'express';
 import UsersModel from '../models/UsersModel';
 import UsersService from '../services/users.service';
-import Validation from '../middleware/validations';
+import Validation from '../validations/validations';
 
 export default class TeamsController {
   private usersService: UsersService;

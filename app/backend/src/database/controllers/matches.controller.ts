@@ -22,4 +22,11 @@ export default class MatchesController {
     const allMatches = await this.matchesService.getAllMatches();
     return res.status(200).json(allMatches);
   }
+
+  public async finishMatch(req: Request, res: Response) {
+    const { id } = req.params;
+    const getId = Number(id);
+    const finished = await this.matchesService.finishMatch(getId);
+    return res.status(200).json(finished);
+  }
 }

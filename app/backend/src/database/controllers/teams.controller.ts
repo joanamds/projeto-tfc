@@ -15,13 +15,13 @@ export default class TeamsController {
   }
 
   public async getById(req: Request, res: Response) {
-    const { id } = req.params;
-    const numberId = Number(id);
-    const findTeam = await this.teamsService.getById(numberId);
-    if (!findTeam) {
+    try {
+      const { id } = req.params;
+      const numberId = Number(id);
+      const findTeam = await this.teamsService.getById(numberId);
+      return res.status(200).json(findTeam);
+    } catch (error) {
       return res.status(404).json({ message: 'Team not found' });
     }
-
-    return res.status(200).json(findTeam);
   }
 }

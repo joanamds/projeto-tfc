@@ -11,7 +11,7 @@ chai.use(chaiHttp);
 
 const { expect } = chai;
 
-describe('Teste Teams', () => {
+describe('GET /Teams', () => {
   let teamsController: TeamsController;
   let getAllTeamsStub: sinon.SinonStub;
 

@@ -9,9 +9,13 @@ const validateJWT = new ValidateJWT(UsersModel);
 
 router.get('/', matchesController.getMatches.bind(matchesController));
 router.patch(
+  '/:id',
+  validateJWT.validateToken.bind(validateJWT),
+  matchesController.updateMatch.bind(matchesController),
+);
+router.patch(
   '/:id/finish',
   validateJWT.validateToken.bind(validateJWT),
   matchesController.finishMatch.bind(matchesController),
 );
-
 export default router;

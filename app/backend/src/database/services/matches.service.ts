@@ -53,7 +53,18 @@ export default class MatchesService {
       { inProgress: false },
       { where: { id } },
     );
-    console.log(finished);
     return finished;
+  }
+
+  public async updateMatch(
+    id: number,
+    homeGoals: number,
+    awayGoals: number,
+  ) {
+    const updated = await this.matchesModel.update(
+      { homeTeamGoals: homeGoals, awayTeamGoals: awayGoals },
+      { where: { id } },
+    );
+    return updated;
   }
 }

@@ -33,4 +33,17 @@ export default class MatchesController {
     await this.matchesService.finishMatch(getId);
     return res.status(200).json({ message: 'Finished' });
   }
+
+  public async updateMatch(req: Request, res: Response) {
+    const { id } = req.params;
+    const { homeTeamGoals, awayTeamGoals } = req.body;
+    const { authorization } = req.headers;
+
+    if (!authorization) {
+      return res.status(401).json({ message: 'Token not found' });
+    }
+    const numberId = Number(id);
+    await this.matchesService.updateMatch(numberId, homeTeamGoals, awayTeamGoals);
+    return res.status(200).json({ message: 'Game score updated!' });
+  }
 }

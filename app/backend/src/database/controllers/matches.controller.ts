@@ -25,8 +25,12 @@ export default class MatchesController {
 
   public async finishMatch(req: Request, res: Response) {
     const { id } = req.params;
+    const { authorization } = req.headers;
+    if (!authorization) {
+      return res.status(401).json({ message: 'Token not found' });
+    }
     const getId = Number(id);
-    const finished = await this.matchesService.finishMatch(getId);
-    return res.status(200).json(finished);
+    await this.matchesService.finishMatch(getId);
+    return res.status(200).json({ message: 'Finished' });
   }
 }

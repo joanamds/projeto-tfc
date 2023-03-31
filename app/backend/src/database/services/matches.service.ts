@@ -1,4 +1,4 @@
-import Match from '../interfaces/Match';
+import { Match, NewMatch } from '../interfaces/Match';
 import MatchesModel from '../models/MatchesModel';
 import TeamsModel from '../models/TeamsModel';
 
@@ -26,6 +26,11 @@ export default class MatchesService {
     });
 
     return matches;
+  }
+
+  public async getById(id: number) {
+    const match = await this.matchesModel.findByPk(id);
+    return match;
   }
 
   public async getByProgress(p: boolean): Promise<Match[]> {
@@ -66,5 +71,12 @@ export default class MatchesService {
       { where: { id } },
     );
     return updated;
+  }
+
+  public async insertNewMatch(newMatch: NewMatch) {
+    const created = await this.matchesModel.create({
+      newMatch,
+    });
+    return created.id;
   }
 }

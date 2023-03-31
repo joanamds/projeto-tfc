@@ -7,6 +7,11 @@ const router = express.Router();
 const matchesController = new MatchesController();
 const validateJWT = new ValidateJWT(UsersModel);
 
+router.post(
+  '/',
+  validateJWT.validateToken.bind(validateJWT),
+  matchesController.createMatch.bind(matchesController),
+);
 router.get('/', matchesController.getMatches.bind(matchesController));
 router.patch(
   '/:id',

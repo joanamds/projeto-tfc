@@ -1,4 +1,4 @@
-export default interface Match {
+export interface Match {
   id: number;
   homeTeamId: number;
   homeTeamGoals: number;
@@ -11,4 +11,11 @@ export default interface Match {
   awayTeam: {
     teamName: string;
   };
+}
+
+export interface NewMatch {
+  homeTeamId: number;
+  awayTeamId: number;
+  homeTeamGoals: number;
+  awayTeamGoals: number;
 }

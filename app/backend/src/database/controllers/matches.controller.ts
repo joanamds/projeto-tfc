@@ -2,6 +2,7 @@ import { Request, Response } from 'express';
 import MatchesModel from '../models/MatchesModel';
 import MatchesService from '../services/matches.service';
 
+const notFound = { message: 'Token not found' };
 export default class MatchesController {
   private matchesService: MatchesService;
 
@@ -27,7 +28,7 @@ export default class MatchesController {
     const { id } = req.params;
     const { authorization } = req.headers;
     if (!authorization) {
-      return res.status(401).json({ message: 'Token not found' });
+      return res.status(401).json(notFound);
     }
     const getId = Number(id);
     await this.matchesService.finishMatch(getId);
@@ -40,10 +41,21 @@ export default class MatchesController {
     const { authorization } = req.headers;
 
     if (!authorization) {
-      return res.status(401).json({ message: 'Token not found' });
+      return res.status(401).json(notFound);
     }
     const numberId = Number(id);
     await this.matchesService.updateMatch(numberId, homeTeamGoals, awayTeamGoals);
     return res.status(200).json({ message: 'Game score updated!' });
+  }
+
+  public async createMatch(req: Request, res: Response) {
+    const { authorization } = req.headers;
+    if (!authorization) {
+      return res.status(401).json(notFound);
+    }
+    console.log(req.body);
+    const create = await this.matchesService.insertNewMatch(req.body);
+    const getNewMatch = await this.matchesService.getById(create);
+    return res.status(201).json(getNewMatch);
   }
 }

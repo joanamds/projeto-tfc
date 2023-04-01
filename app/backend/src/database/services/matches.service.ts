@@ -29,7 +29,9 @@ export default class MatchesService {
   }
 
   public async getById(id: number) {
-    const match = await this.matchesModel.findByPk(id);
+    const match = await this.matchesModel.findOne({
+      where: { id },
+    });
     return match;
   }
 
@@ -74,8 +76,13 @@ export default class MatchesService {
   }
 
   public async insertNewMatch(newMatch: NewMatch) {
+    const { homeTeamId, awayTeamId, homeTeamGoals, awayTeamGoals } = newMatch;
     const created = await this.matchesModel.create({
-      newMatch,
+      homeTeamId,
+      awayTeamId,
+      homeTeamGoals,
+      awayTeamGoals,
+      inProgress: true,
     });
     return created.id;
   }

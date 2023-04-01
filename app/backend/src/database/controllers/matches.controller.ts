@@ -1,6 +1,7 @@
 import { Request, Response } from 'express';
 import MatchesModel from '../models/MatchesModel';
 import MatchesService from '../services/matches.service';
+import MatchValidation from '../validations/matchValidation';
 
 const notFound = { message: 'Token not found' };
 export default class MatchesController {
@@ -53,7 +54,16 @@ export default class MatchesController {
     if (!authorization) {
       return res.status(401).json(notFound);
     }
-    console.log(req.body);
+    const validate = new MatchValidation(req.body);
+    if (!validate.validateTeamsId()) {
+      return res.status(422).json({
+        message: 'It is not possible to create a match with two equal teams',
+      });
+    }
+    const teamsExist = await validate.validateTeamsExist();
+    if (!teamsExist) {
+      return res.status(404).json({ message: 'There is no team with such id!' });
+    }
     const create = await this.matchesService.insertNewMatch(req.body);
     const getNewMatch = await this.matchesService.getById(create);
     return res.status(201).json(getNewMatch);

@@ -1,7 +1,7 @@
 import { Request, Response } from 'express';
 import UsersModel from '../models/UsersModel';
 import UsersService from '../services/users.service';
-import Validation from '../validations/validations';
+import LoginValidation from '../validations/loginValidation';
 
 export default class TeamsController {
   private usersService: UsersService;
@@ -12,7 +12,7 @@ export default class TeamsController {
 
   public async login(req: Request, res: Response) {
     const { email, password } = req.body;
-    const validate = new Validation(email, password);
+    const validate = new LoginValidation(email, password);
 
     if (!email || !password) {
       return res.status(400).json({ message: 'All fields must be filled' });

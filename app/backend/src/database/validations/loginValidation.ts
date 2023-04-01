@@ -1,8 +1,11 @@
-export default class Validation {
+export default class LoginValidation {
   private email: string;
   private password: string;
 
-  constructor(email: string, password: string) {
+  constructor(
+    email: string,
+    password: string,
+  ) {
     this.email = email;
     this.password = password;
   }
@@ -15,7 +18,7 @@ export default class Validation {
     return true;
   }
 
-  validatePassword() {
+  validatePassword(): boolean {
     if (this.password.length < 6) {
       return false;
     }

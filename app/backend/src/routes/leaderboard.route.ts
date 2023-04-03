@@ -4,6 +4,6 @@ import LeaderboardController from '../database/controllers/leaderboard.controlle
 const router = express.Router();
 const leaderboardController = new LeaderboardController();
 
-router.get('/home', leaderboardController.getLeaderboard.bind(leaderboardController));
+router.get('/home', leaderboardController.orderedLiderboard.bind(leaderboardController));
 
 export default router;

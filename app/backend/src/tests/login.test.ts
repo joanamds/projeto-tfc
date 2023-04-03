@@ -49,7 +49,7 @@ describe('POST /login', () => {
     })
   })
 
-  describe('Testa a rota /login/role', () => {
+  describe('Testa a rota GET /login/role', () => {
     it('Testa se retorna status 401 e mensagem de erro se o token não for encontrado', async () => {
       const response = await chai.request(app).get('/login/role');
       expect(response).to.have.status(401);

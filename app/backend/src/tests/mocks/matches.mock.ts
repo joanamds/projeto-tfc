@@ -1350,3 +1350,20 @@ export const finishedMatches = [
 		}
 	}
 ]
+
+export const errorTwoEqualTeams = {
+	message: 'It is not possible to create a match with two equal teams',
+}
+
+export const errorInvalidId = {
+	message: 'There is no team with such id!',
+}
+
+export const matchCreated = {
+	id: 49,
+	homeTeamId: 16,
+	awayTeamId: 9,
+	homeTeamGoals: 2,
+	awayTeamGoals: 2,
+	inProgress: true
+}

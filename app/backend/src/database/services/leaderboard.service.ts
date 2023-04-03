@@ -18,19 +18,22 @@ export default class LeaderboardService {
   }
 
   public async totalGames(): Promise<{ name: string, totalGames: number }[]> {
-    const result = await this.sequelize.query(
-      `
-      SELECT teams.team_name AS name,
-      COUNT(*) AS totalGames
-      FROM teams
-      JOIN matches
-      ON teams.id = matches.home_team_id
-      OR teams.id = matches.away_team_id AND matches.in_progress = false
-      GROUP BY teams.id;
-      `,
-      { type: 'SELECT' },
-    );
-    return result as { name: string, totalGames: number }[];
+    const result = await this.teamsModel.findAll({
+      attributes: [
+        'teamName',
+        [this.sequelize.fn('COUNT', this.sequelize.col('matches.id')), 'totalGames'],
+      ],
+      include: [{
+        model: this.matchesModel,
+        where: { inProgress: false },
+        attributes: [],
+      }],
+      group: ['teams.id'],
+    });
+    return result.map((row) => ({
+      name: row.teamName,
+      totalGames: row.get('totalGames') as number,
+    }));
   }
 
   public async totalVictories(): Promise<{ name: string, totalVictories: number }[]> {
@@ -43,10 +46,10 @@ export default class LeaderboardService {
       AND matches.away_team_goals > matches.home_team_goals THEN 1
       ELSE 0
       END) AS totalVictories
-      FROM teams
-      JOIN matches
+      FROM teams JOIN matches
       ON teams.id = matches.home_team_id
       OR teams.id = matches.away_team_id AND matches.in_progress = false
+      WHERE matches.in_progress = false
       GROUP BY teams.id;
       `,
       { type: 'SELECT' },
@@ -159,12 +162,12 @@ export default class LeaderboardService {
           AND matches.home_team_goals > matches.away_team_goals THEN 1
           WHEN matches.away_team_id = teams.id
           AND matches.away_team_goals > matches.home_team_goals THEN 1 ELSE 0 END) * 3
-        + SUM(CASE
-        WHEN matches.home_team_goals = matches.away_team_goals THEN 1
+        + SUM(CASE WHEN matches.home_team_goals = matches.away_team_goals THEN 1
         ELSE 0 END)) / COUNT(*) * 100, 2) AS efficiency
     FROM TRYBE_FUTEBOL_CLUBE.teams AS teams
     JOIN TRYBE_FUTEBOL_CLUBE.matches AS matches
     ON teams.id = matches.home_team_id OR teams.id = matches.away_team_id
+    WHERE matches.in_progress = false
     GROUP BY teams.id;
       `,
       { type: 'SELECT' },

@@ -1,4 +1,4 @@
-const leaderboard = [
+export const leaderboard = [
 	{
 		"name": "Palmeiras",
 		"totalPoints": 13,
@@ -193,7 +193,7 @@ const leaderboard = [
 	}
 ]
 
-const aleaderboard = [
+export const aleaderboard = [
 	{
 		"name": "Palmeiras",
 		"totalPoints": 6,
@@ -388,7 +388,7 @@ const aleaderboard = [
 	}
 ]
 
-const hleaderboard = [
+export const hleaderboard = [
 	{
 		"name": "Santos",
 		"totalPoints": 9,

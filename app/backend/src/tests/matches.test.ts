@@ -12,9 +12,6 @@ chai.use(chaiHttp);
 const { expect } = chai;
 
 describe('GET /matches', () => {
-  afterEach(() => {
-    sinon.restore();
-  })
   it('Testa se retorna status 200 e todas as partidas', async () => {
     const response = await chai.request(app).get('/matches');
     expect(response).to.have.status(200);
@@ -89,7 +86,7 @@ describe('POST /matches', () => {
   })
 
   it('Testa se retorna status 201 e a partida criada', async () => {
-    sinon.stub(MatchesModel, 'create').resolves(matchCreated as any);
+    const matchStub = sinon.stub(MatchesModel, 'create').resolves(matchCreated as any);
     const login = await chai.request(app).post('/login').send(loginValid);
     const getToken = login.body.token;
     const response = await chai.request(app).post('/matches').send({
@@ -98,7 +95,9 @@ describe('POST /matches', () => {
       homeTeamGoals: 2,
       awayTeamGoals: 2
     }).set('Authorization', getToken);
+    console.log(response);
     expect(response).to.have.status(201);
     expect(response.body).to.deep.equal(matchCreated);
+    matchStub.restore();
   });
 })

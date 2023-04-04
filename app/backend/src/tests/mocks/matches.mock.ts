@@ -1360,10 +1360,10 @@ export const errorInvalidId = {
 }
 
 export const matchCreated = {
-	id: 49,
-	homeTeamId: 16,
-	awayTeamId: 9,
-	homeTeamGoals: 2,
-	awayTeamGoals: 2,
-	inProgress: true
-}
+  id: 49,
+  homeTeamId: 16,
+  awayTeamId: 9,
+  homeTeamGoals: 2,
+  awayTeamGoals: 2,
+  inProgress: true,
+};

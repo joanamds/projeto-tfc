@@ -1,15 +1,20 @@
+import * as sinon from 'sinon';
 import * as chai from 'chai';
 import { app } from '../app';
 // @ts-ignore
 import chaiHttp = require('chai-http');
 import { allMatches, finishedMatches, inProgressMatches, errorTwoEqualTeams, errorInvalidId, matchCreated } from './mocks/matches.mock';
 import { invalid, loginValid } from './mocks/login.mock';
+import MatchesModel from '../database/models/MatchesModel';
 
 chai.use(chaiHttp);
 
 const { expect } = chai;
 
 describe('GET /matches', () => {
+  afterEach(() => {
+    sinon.restore();
+  })
   it('Testa se retorna status 200 e todas as partidas', async () => {
     const response = await chai.request(app).get('/matches');
     expect(response).to.have.status(200);
@@ -84,6 +89,7 @@ describe('POST /matches', () => {
   })
 
   it('Testa se retorna status 201 e a partida criada', async () => {
+    sinon.stub(MatchesModel, 'create').resolves(matchCreated as any);
     const login = await chai.request(app).post('/login').send(loginValid);
     const getToken = login.body.token;
     const response = await chai.request(app).post('/matches').send({
@@ -94,5 +100,5 @@ describe('POST /matches', () => {
     }).set('Authorization', getToken);
     expect(response).to.have.status(201);
     expect(response.body).to.deep.equal(matchCreated);
-  })
+  });
 })

@@ -3,8 +3,7 @@ import * as chai from 'chai';
 import { app } from '../app';
 // @ts-ignore
 import chaiHttp = require('chai-http');
-// import UsersService from '../database/services/users.service';
-// import UsersController from '../database/controllers/users.controller';
+import UsersService from '../database/services/users.service';
 import { invalidEntry, missingFields, loginValid, tokenNotFound, tokenInvalid, invalid, getRole } from './mocks/login.mock';
 
 chai.use(chaiHttp);
@@ -12,6 +11,10 @@ chai.use(chaiHttp);
 const { expect } = chai;
 
 describe('POST /login', () => {
+  afterEach(() => {
+    sinon.restore();
+  })
+
   describe('Testa os erros caso falte campos preenchidos', () => {
     it('Testa se retorna status 400 e a mensagem de erro caso falte password na requisição', async () => {
       const response = await chai.request(app).post('/login').send({ email: 'email@email.com'});
@@ -62,6 +65,7 @@ describe('POST /login', () => {
     })
     it('Testa se retorna status 200 e um objeto contendo o "role" do usuário', async () => {
       const login = await chai.request(app).post('/login').send(loginValid);
+      sinon.stub(UsersService.prototype, 'login').resolves(login.body);
       const getToken = login.body.token;
       const response = await chai.request(app).get('/login/role').set('Authorization', getToken);
       expect(response).to.have.status(200);

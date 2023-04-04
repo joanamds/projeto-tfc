@@ -163,27 +163,6 @@ export default class LeaderboardService {
     }));
   }
 
-  public async efficiency(): Promise<{ name: string, efficiency: number }[]> {
-    const result = await this.matchesModel.findAll({
-      attributes: [[this.sequelize.literal('`homeTeam`.`team_name`'), 'name'],
-        [this.sequelize.fn('ROUND', this.sequelize.literal(`(SUM(CASE
-          WHEN matches.home_team_id = homeTeam.id
-          AND matches.home_team_goals > matches.away_team_goals THEN 1 ELSE 0 END)) /
-          COUNT(matches.home_team_id) * 100`), 2), 'efficiency'],
-      ],
-      include: [{
-        model: this.teamsModel,
-        as: 'homeTeam',
-        attributes: [],
-      }],
-      where: { inProgress: false },
-      group: ['homeTeam.team_name'],
-    });
-    return result.map((row) => ({ name: row.get('name') as string,
-      efficiency: row.get('efficiency') as number,
-    }));
-  }
-
   public async calculatePoints(): Promise<{ name: string, totalPoints: number }[]> {
     const [victories, draws] = await Promise.all([
       this.totalVictories(),
@@ -195,5 +174,19 @@ export default class LeaderboardService {
     }));
 
     return points as { name: string, totalPoints: number }[];
+  }
+
+  public async efficiency(): Promise<{ name: string, efficiency: number }[]> {
+    const [points, games] = await Promise.all([
+      this.calculatePoints(),
+      this.totalGames(),
+    ]);
+    const results = points.map((row) => {
+      const { name, totalPoints } = row;
+      const teamGames = games.find((game) => game.name === name)?.totalGames || 0;
+      const efficiency = (totalPoints / (teamGames * 3)) * 100;
+      return { name, efficiency: Number(efficiency.toFixed(2)) };
+    });
+    return results;
   }
 }

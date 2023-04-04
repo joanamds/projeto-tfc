@@ -1,15 +1,15 @@
 import { Request, Response } from 'express';
 import sequelize from '../models';
-import LeaderboardService from '../services/leaderboard.service';
+import HLeaderboardService from '../services/hleaderboard.service';
 import TeamsModel from '../models/TeamsModel';
 import MatchesModel from '../models/MatchesModel';
 // import Leaderboard from '../interfaces/Leaderboard';
 
-export default class LeaderboardController {
-  private leaderboardService: LeaderboardService;
+export default class HLeaderboardController {
+  private leaderboardService: HLeaderboardService;
 
   constructor() {
-    this.leaderboardService = new LeaderboardService(sequelize, TeamsModel, MatchesModel);
+    this.leaderboardService = new HLeaderboardService(sequelize, TeamsModel, MatchesModel);
   }
 
   public async getItems() {

@@ -3,7 +3,7 @@ import TeamsModel from '../models/TeamsModel';
 import MatchesModel from '../models/MatchesModel';
 
 const m = 'matches.home_team_id';
-export default class LeaderboardService {
+export default class HLeaderboardService {
   private sequelize: Sequelize;
   private teamsModel: typeof TeamsModel;
   private matchesModel: typeof MatchesModel;

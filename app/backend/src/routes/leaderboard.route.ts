@@ -11,4 +11,5 @@ const leaderboardController = new LeaderboardController();
 router.get('/', leaderboardController.orderedLiderboard.bind(leaderboardController));
 router.get('/home', hleaderboardController.orderedLiderboard.bind(hleaderboardController));
 router.get('/away', aleaderboardController.orderedLiderboard.bind(aleaderboardController));
+
 export default router;

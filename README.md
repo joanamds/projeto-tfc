@@ -1,10 +1,119 @@
-# :construction: README em construção ! :construction:
-<!-- Olá, Tryber!
-Esse é apenas um arquivo inicial para o README do seu projeto.
-É essencial que você preencha esse documento por conta própria, ok?
-Não deixe de usar nossas dicas de escrita de README de projetos, e deixe sua criatividade brilhar!
-:warning: IMPORTANTE: você precisa deixar nítido:
-- quais arquivos/pastas foram desenvolvidos por você; 
-- quais arquivos/pastas foram desenvolvidos por outra pessoa estudante;
-- quais arquivos/pastas foram desenvolvidos pela Trybe.
--->
+<div align="center">
+
+![negative_logo](https://user-images.githubusercontent.com/106452876/230154325-dbaefe71-3b3a-48a2-9ab0-e442a5a204eb.png)
+
+</div>
+
+# :soccer:
+
+Neste projeto foi criada uma API para ser consumida pelo front end de uma página que renderiza a classificação dos times de um campeonato de futebol. 
+
+
+## Screenshots
+
+![tfc](https://user-images.githubusercontent.com/106452876/230155315-e341e393-8cfe-47af-94ea-1360779620ea.jpg)
+
+
+## Documentação da API
+
+| Método HTTP | Endpoint   | Descrição               | 
+| :---------- | :--------- | :---------------------- |
+| POST        | `/login`   | Faz o login com usuários do banco de dados                        |
+| GET         | `/teams`   | Retorna todos os times do campeonato
+| GET         | `/teams/:id` | Retorna o time de acordo com o id
+| GET         | `/login/role`| :key: Retorna se é usuário ou administrador
+| GET         | `/matches`   | Retorna todas as partidas 
+| GET         | `/matches?inProgress=true` | Retorna todas as partidas em andamento
+| GET         | `/matches?inProgress=false`| Retorna todas as partidas finalizadas
+| PATCH       | `/matches/:id`    | :key: Atualiza a partida de acordo com o id passado no parâmetro
+| PATCH       | `/matches/:id/finish` | :key: Finaliza uma partida
+| POST         | `/matches`           | :key: Insere uma nova partida
+| GET          | `/leaderboar/home`   | Retorna a classificação dos times mandantes
+| GET          | `/leaderboard/away`  | Retorna a classificação dos times visitantes
+| GET          | `/leaderboard`       | Retorna a classificação geral dos times 
+
+:key: Para as rotas que tem uma chave é necessário inserir o token gerado no login no headers com o título "Authorization".
+
+### Corpo das requisições
+
+- POST `/login`
+
+```json
+{
+	"email": "string",
+	"password": "string"
+}
+```
+
+- POST `/matches`
+
+```json
+{
+  "homeTeamId": 16, // O valor deve ser o id do time
+  "awayTeamId": 8, // O valor deve ser o id do time
+  "homeTeamGoals": 2,
+  "awayTeamGoals": 2,
+}
+```
+
+- PATCH `/matches/:id`
+
+```json
+{
+  "homeTeamGoals": 3,
+  "awayTeamGoals": 1
+}
+```
+## Tecnologias usadas
+Back-end:
+> Desenvolvido usando: Docker, docker-compose, Node.js, TypeScript, Sequelize
+
+
+
+## Instalação
+
+Clone o projeto
+
+```bash
+  git clone https://link-para-o-projeto
+```
+
+Entre no diretório do projeto
+
+```bash
+  cd my-project
+```
+
+Instale as dependências
+
+```bash
+  npm install
+```
+
+### Com Docker
+
+- Na raíz do projeto rode o comando:
+```bash
+npm run compose:up
+```
+- Em seguida abra o terminal interativo do container:
+```bash
+docker exec -it app_backend sh
+```
+- Instale as dependências dentro do container:
+```bash
+npm install
+```
+
+## Rodando os testes
+
+Para rodar os testes de integração, rode o seguinte comando dentro do container
+
+```bash
+  npm test
+```
+
+
+## Demonstração Front End
+
+[tfc.webm](https://user-images.githubusercontent.com/106452876/230155439-17047d3a-def0-425e-80e0-a0b52f9e8da1.webm)

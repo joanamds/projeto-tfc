@@ -65,7 +65,6 @@ export default class MatchesController {
       return res.status(404).json({ message: 'There is no team with such id!' });
     }
     const create = await this.matchesService.insertNewMatch(req.body);
-    // const getNewMatch = await this.matchesService.getById(create);
     return res.status(201).json(create);
   }
 }

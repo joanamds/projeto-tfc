@@ -64,6 +64,7 @@ export default class MatchesController {
     if (!teamsExist) {
       return res.status(404).json({ message: 'There is no team with such id!' });
     }
+
     const create = await this.matchesService.insertNewMatch(req.body);
     return res.status(201).json(create);
   }

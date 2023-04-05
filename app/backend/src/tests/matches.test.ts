@@ -86,7 +86,7 @@ describe('POST /matches', () => {
   })
 
   it('Testa se retorna status 201 e a partida criada', async () => {
-    const matchStub = sinon.stub(MatchesModel, 'create').resolves(matchCreated as any);
+    const matchStub = sinon.stub(MatchesModel, 'create').resolves(matchCreated as MatchesModel);
     const login = await chai.request(app).post('/login').send(loginValid);
     const getToken = login.body.token;
     const response = await chai.request(app).post('/matches').send({
@@ -95,7 +95,6 @@ describe('POST /matches', () => {
       homeTeamGoals: 2,
       awayTeamGoals: 2
     }).set('Authorization', getToken);
-    console.log(response);
     expect(response).to.have.status(201);
     expect(response.body).to.deep.equal(matchCreated);
     matchStub.restore();

@@ -84,6 +84,6 @@ export default class MatchesService {
       awayTeamGoals,
       inProgress: true,
     });
-    return created.id;
+    return created;
   }
 }

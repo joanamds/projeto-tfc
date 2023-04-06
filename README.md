@@ -117,3 +117,8 @@ Para rodar os testes de integração, rode o seguinte comando dentro do containe
 ## Demonstração Front End
 
 [tfc.webm](https://user-images.githubusercontent.com/106452876/230155439-17047d3a-def0-425e-80e0-a0b52f9e8da1.webm)
+
+## 🔗 Links
+[![portfolio](https://img.shields.io/badge/my_portfolio-000?style=for-the-badge&logo=ko-fi&logoColor=white)](https://joanamds.github.io/#/)
+[![linkedin](https://img.shields.io/badge/linkedin-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/dev-joanamds/)
+

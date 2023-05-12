@@ -8,13 +8,19 @@
 
 Neste projeto foi criada uma API para ser consumida pelo front end de uma página que renderiza a classificação dos times de um campeonato de futebol. 
 
-
-## Screenshots
+<details>
+<summary>
+	<strong> 🗄️ Screenshot back-end </strong>
+</summary>
 
 ![tfc](https://user-images.githubusercontent.com/106452876/230155315-e341e393-8cfe-47af-94ea-1360779620ea.jpg)
+	
+</details>
+<details>
 
-
-## Documentação da API
+<summary> 
+	<strong> 📁 Documentação da API</strong>
+</summary>
 
 | Método HTTP | Endpoint   | Descrição               | 
 | :---------- | :--------- | :---------------------- |
@@ -64,24 +70,25 @@ Neste projeto foi criada uma API para ser consumida pelo front end de uma págin
   "awayTeamGoals": 1
 }
 ```
+
+</details> 
+
 ## Tecnologias usadas
 Back-end:
 > Desenvolvido usando: Docker, docker-compose, Node.js, TypeScript, Sequelize
 
-
-
-## Instalação
+## 💻 Instalação
 
 Clone o projeto
 
 ```bash
-  git clone https://link-para-o-projeto
+  git clone git@github.com:joanamds/projeto-tfc.git
 ```
 
 Entre no diretório do projeto
 
 ```bash
-  cd my-project
+  cd projeto-tfc
 ```
 
 Instale as dependências
@@ -114,7 +121,7 @@ Para rodar os testes de integração, rode o seguinte comando dentro do containe
 ```
 
 
-## Demonstração Front End
+## Screenshot front-end
 
 [tfc.webm](https://user-images.githubusercontent.com/106452876/230155439-17047d3a-def0-425e-80e0-a0b52f9e8da1.webm)
 

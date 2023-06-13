@@ -16,7 +16,18 @@ Neste projeto foi criada uma API para ser consumida pelo front end de uma págin
 ![tfc](https://user-images.githubusercontent.com/106452876/230155315-e341e393-8cfe-47af-94ea-1360779620ea.jpg)
 	
 </details>
+
 <details>
+<summary>
+	<strong> 💻 Screenshot front-end </strong>
+</summary>
+
+[tfc.webm](https://user-images.githubusercontent.com/106452876/230155439-17047d3a-def0-425e-80e0-a0b52f9e8da1.webm)
+
+</details>
+
+<details>
+
 
 <summary> 
 	<strong> 📁 Documentação da API</strong>
@@ -73,31 +84,37 @@ Neste projeto foi criada uma API para ser consumida pelo front end de uma págin
 
 </details> 
 
-## Tecnologias usadas
-Back-end:
-> Desenvolvido usando: Docker, docker-compose, Node.js, TypeScript, Sequelize
+<details>
 
-## 💻 Instalação
+<summary> 
+	<strong> 🔽 Instalação </strong>
+</summary>
 
-Clone o projeto
+	
+- Clone o projeto
 
 ```bash
   git clone git@github.com:joanamds/projeto-tfc.git
 ```
 
-Entre no diretório do projeto
+- Entre no diretório do projeto
 
 ```bash
   cd projeto-tfc
 ```
 
-Instale as dependências
+- Instale as dependências
 
 ```bash
   npm install
 ```
 
-### Com Docker
+</details>
+	
+<details>
+<summary> 
+	<strong> 🐳 Rodando o projeto com Docker </strong>
+</summary>
 
 - Na raíz do projeto rode o comando:
 ```bash
@@ -111,19 +128,27 @@ docker exec -it app_backend sh
 ```bash
 npm install
 ```
+	
+</details>
 
-## Rodando os testes
+<details>
+
+<summary> 
+	<strong> ✅ Rodando os testes </strong>
+</summary>
+
 
 Para rodar os testes de integração, rode o seguinte comando dentro do container
 
 ```bash
   npm test
 ```
+</details>
 
 
-## Screenshot front-end
-
-[tfc.webm](https://user-images.githubusercontent.com/106452876/230155439-17047d3a-def0-425e-80e0-a0b52f9e8da1.webm)
+## Tecnologias usadas
+Back-end:
+> Desenvolvido usando: Docker, docker-compose, Node.js, TypeScript, Sequelize
 
 ## 🔗 Links
 [![portfolio](https://img.shields.io/badge/my_portfolio-000?style=for-the-badge&logo=ko-fi&logoColor=white)](https://joanamds.github.io/#/)
